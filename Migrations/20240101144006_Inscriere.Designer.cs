@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProiectWeb.Data;
 
@@ -11,9 +12,10 @@ using ProiectWeb.Data;
 namespace ProiectWeb.Migrations
 {
     [DbContext(typeof(ProiectWebContext))]
-    partial class ProiectWebContextModelSnapshot : ModelSnapshot
+    [Migration("20240101144006_Inscriere")]
+    partial class Inscriere
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +33,7 @@ namespace ProiectWeb.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<decimal>("Pret")
-                        .HasColumnType("decimal(6,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Tip")
                         .IsRequired()
@@ -40,31 +42,6 @@ namespace ProiectWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Abonament");
-                });
-
-            modelBuilder.Entity("ProiectWeb.Models.Clasa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Descriere")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Instructor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nume")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clasa");
                 });
 
             modelBuilder.Entity("ProiectWeb.Models.Inscriere", b =>
@@ -128,32 +105,6 @@ namespace ProiectWeb.Migrations
                     b.ToTable("Membru");
                 });
 
-            modelBuilder.Entity("ProiectWeb.Models.Participare", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ClasaId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataOra")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("MembruId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClasaId");
-
-                    b.HasIndex("MembruId");
-
-                    b.ToTable("Participare");
-                });
-
             modelBuilder.Entity("ProiectWeb.Models.Inscriere", b =>
                 {
                     b.HasOne("ProiectWeb.Models.Abonament", "Abonament")
@@ -169,29 +120,9 @@ namespace ProiectWeb.Migrations
                     b.Navigation("Membru");
                 });
 
-            modelBuilder.Entity("ProiectWeb.Models.Participare", b =>
-                {
-                    b.HasOne("ProiectWeb.Models.Clasa", "Clasa")
-                        .WithMany("Participari")
-                        .HasForeignKey("ClasaId");
-
-                    b.HasOne("ProiectWeb.Models.Membru", "Membru")
-                        .WithMany()
-                        .HasForeignKey("MembruId");
-
-                    b.Navigation("Clasa");
-
-                    b.Navigation("Membru");
-                });
-
             modelBuilder.Entity("ProiectWeb.Models.Abonament", b =>
                 {
                     b.Navigation("Inscrieri");
-                });
-
-            modelBuilder.Entity("ProiectWeb.Models.Clasa", b =>
-                {
-                    b.Navigation("Participari");
                 });
 
             modelBuilder.Entity("ProiectWeb.Models.Membru", b =>

@@ -12,5 +12,8 @@ namespace ProiectWeb.Models
         public DateTime DataNasterii { get; set; }
         public string Email { get; set; }
         public string NumarTelefon { get; set; }
+
+        public ICollection<Inscriere>? Inscrieri { get; set; }
+
     }
 }

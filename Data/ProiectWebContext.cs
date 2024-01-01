@@ -17,5 +17,11 @@ namespace ProiectWeb.Data
         public DbSet<ProiectWeb.Models.Membru> Membru { get; set; } = default!;
 
         public DbSet<ProiectWeb.Models.Abonament>? Abonament { get; set; }
+
+        public DbSet<ProiectWeb.Models.Inscriere>? Inscriere { get; set; }
+
+        public DbSet<ProiectWeb.Models.Participare>? Participare { get; set; }
+
+        public DbSet<ProiectWeb.Models.Clasa>? Clasa { get; set; }
     }
 }

@@ -1,0 +1,45 @@
+﻿@page
+@model ProiectWeb.Pages.Participari.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Participare</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Participare.Id" />
+            <div class="form-group">
+                <label asp-for="Participare.MembruId" class="control-label"></label>
+                <select asp-for="Participare.MembruId" class="form-control" asp-items="ViewBag.MembruId"></select>
+                <span asp-validation-for="Participare.MembruId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Participare.ClasaId" class="control-label"></label>
+                <select asp-for="Participare.ClasaId" class="form-control" asp-items="ViewBag.ClasaId"></select>
+                <span asp-validation-for="Participare.ClasaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Participare.DataOra" class="control-label"></label>
+                <input asp-for="Participare.DataOra" class="form-control" />
+                <span asp-validation-for="Participare.DataOra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
