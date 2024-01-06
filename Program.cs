@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProiectWeb.Data;
 var builder = WebApplication.CreateBuilder(args);
@@ -8,11 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ProiectWebContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectWebContext") ?? throw new InvalidOperationException("Connection string 'ProiectWebContext' not found.")));
-
-builder.Services.AddDbContext<LibraryIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectWebContext") ?? throw new InvalidOperationException("Connection string 'ProiectWebContext' not found.")));
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-options.SignIn.RequireConfirmedAccount = true)
- .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 var app = builder.Build();
 
