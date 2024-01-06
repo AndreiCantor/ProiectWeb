@@ -21,12 +21,19 @@ namespace ProiectWeb.Pages.Membrii
 
         public IList<Membru> Membru { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
-            if (_context.Membru != null)
+
+            var membriQuery = from m in _context.Membru
+                              select m;
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                Membru = await _context.Membru.ToListAsync();
+                membriQuery = membriQuery.Where(s => s.Nume.Contains(searchString)
+                                               || s.Prenume.Contains(searchString));
             }
+
+            Membru = await membriQuery.ToListAsync();
         }
     }
 }

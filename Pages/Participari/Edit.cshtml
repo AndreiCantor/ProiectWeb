@@ -16,12 +16,12 @@
             <input type="hidden" asp-for="Participare.Id" />
             <div class="form-group">
                 <label asp-for="Participare.MembruId" class="control-label"></label>
-                <select asp-for="Participare.MembruId" class="form-control" asp-items="ViewBag.MembruId"></select>
+                <select asp-for="Participare.MembruId" class="form-control" asp-items="ViewBag.MembruId">Membru</select>
                 <span asp-validation-for="Participare.MembruId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Participare.ClasaId" class="control-label"></label>
-                <select asp-for="Participare.ClasaId" class="form-control" asp-items="ViewBag.ClasaId"></select>
+                <select asp-for="Participare.ClasaId" class="form-control" asp-items="ViewBag.ClasaId">Clasa</select>
                 <span asp-validation-for="Participare.ClasaId" class="text-danger"></span>
             </div>
             <div class="form-group">
