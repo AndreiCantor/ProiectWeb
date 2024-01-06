@@ -29,7 +29,8 @@ namespace ProiectWeb.Pages.Participari
                 return NotFound();
             }
 
-            var participare = await _context.Participare.FirstOrDefaultAsync(m => m.Id == id);
+            var participare = await _context.Participare.Include(i => i.Membru)
+                    .Include(i => i.Clasa).FirstOrDefaultAsync(m => m.Id == id);
 
             if (participare == null)
             {

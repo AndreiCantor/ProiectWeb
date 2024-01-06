@@ -9,8 +9,6 @@ namespace ProiectWeb.Models
         public int? MembruId { get; set; }
         public int? ClasaId { get; set; }
 
-        [DataType(DataType.Date)]
-
         public DateTime DataOra { get; set; }
 
         // Relații

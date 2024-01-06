@@ -13,6 +13,7 @@ namespace ProiectWeb.Models
         public string Email { get; set; }
         public string NumarTelefon { get; set; }
 
+
         public ICollection<Inscriere>? Inscrieri { get; set; }
 
     }

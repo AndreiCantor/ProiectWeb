@@ -21,8 +21,12 @@ namespace ProiectWeb.Pages.Participari
 
         public IActionResult OnGet()
         {
-        ViewData["ClasaId"] = new SelectList(_context.Set<Clasa>(), "Id", "Id");
-        ViewData["MembruId"] = new SelectList(_context.Membru, "Id", "Id");
+        ViewData["ClasaId"] = new SelectList(_context.Set<Clasa>(), "Id", "Nume");
+            ViewData["MembruId"] = new SelectList(_context.Membru.Select(m => new
+            {
+                Id = m.Id,
+                NumeComplet = m.Nume + " " + m.Prenume
+            }), "Id", "NumeComplet");
             return Page();
         }
 
