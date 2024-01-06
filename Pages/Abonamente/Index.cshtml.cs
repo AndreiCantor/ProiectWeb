@@ -25,7 +25,7 @@ namespace ProiectWeb.Pages.Abonamente
         {
             if (_context.Abonament != null)
             {
-                Abonament = await _context.Abonament.ToListAsync();
+                Abonament = await _context.Abonament.OrderBy(a=> a.Pret).ToListAsync();
             }
         }
     }

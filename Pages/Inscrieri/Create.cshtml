@@ -14,20 +14,20 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Inscriere.MembruId" class="control-label"></label>
+                <label asp-for="Inscriere.MembruId" class="control-label">Membru</label>
                 <select asp-for="Inscriere.MembruId" class ="form-control" asp-items="ViewBag.MembruId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Inscriere.AbonamentId" class="control-label"></label>
+                <label asp-for="Inscriere.AbonamentId" class="control-label">Tip Abonament</label>
                 <select asp-for="Inscriere.AbonamentId" class ="form-control" asp-items="ViewBag.AbonamentId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Inscriere.DataInscriere" class="control-label"></label>
+                <label asp-for="Inscriere.DataInscriere" class="control-label">Data Inscrierii</label>
                 <input asp-for="Inscriere.DataInscriere" class="form-control" />
                 <span asp-validation-for="Inscriere.DataInscriere" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Inscriere.DataInchiere" class="control-label"></label>
+                <label asp-for="Inscriere.DataInchiere" class="control-label">Data Incheierii</label>
                 <input asp-for="Inscriere.DataInchiere" class="form-control" />
                 <span asp-validation-for="Inscriere.DataInchiere" class="text-danger"></span>
             </div>

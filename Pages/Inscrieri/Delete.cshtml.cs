@@ -29,7 +29,10 @@ namespace ProiectWeb.Pages.Inscrieri
                 return NotFound();
             }
 
-            var inscriere = await _context.Inscriere.FirstOrDefaultAsync(m => m.Id == id);
+            var inscriere = await _context.Inscriere
+                    .Include(i => i.Membru)
+                    .Include(i => i.Abonament)
+                    .FirstOrDefaultAsync(m => m.Id == id);
 
             if (inscriere == null)
             {

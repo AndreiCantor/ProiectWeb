@@ -21,8 +21,12 @@ namespace ProiectWeb.Pages.Inscrieri
 
         public IActionResult OnGet()
         {
-        ViewData["AbonamentId"] = new SelectList(_context.Abonament, "Id", "Id");
-        ViewData["MembruId"] = new SelectList(_context.Membru, "Id", "Id");
+            ViewData["AbonamentId"] = new SelectList(_context.Abonament, "Id", "Tip");
+            ViewData["MembruId"] = new SelectList(_context.Membru.Select(m => new
+            {
+                Id = m.Id,
+                NumeComplet = m.Nume + " " + m.Prenume
+            }), "Id", "NumeComplet");
             return Page();
         }
 
