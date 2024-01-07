@@ -6,8 +6,18 @@ using ProiectWeb.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+   policy.RequireRole("Admin"));
+});
+
+
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Membrii");
+    options.Conventions.AuthorizeFolder("/Inscrieri");
+    options.Conventions.AuthorizeFolder("/Participari");
+});
 builder.Services.AddDbContext<ProiectWebContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectWebContext") ?? throw new InvalidOperationException("Connection string 'ProiectWebContext' not found.")));
 
@@ -15,7 +25,7 @@ builder.Services.AddDbContext<GymIdentityContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProiectWebContext") ?? throw new InvalidOperationException("Connection string 'ProiectWebContext' not found.")));
 
 builder.Services.AddDefaultIdentity<GymUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<GymIdentityContext>();
+    .AddRoles<IdentityRole>().AddEntityFrameworkStores<GymIdentityContext>();
 
 var app = builder.Build();
 
