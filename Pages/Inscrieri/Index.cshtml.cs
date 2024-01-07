@@ -18,6 +18,9 @@ namespace ProiectWeb.Pages.Inscrieri
 
         private readonly UserManager<GymUser> _userManager;
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
+
         public IndexModel(ProiectWeb.Data.ProiectWebContext context, UserManager<GymUser> userManager)
         {
             _context = context;
@@ -29,19 +32,25 @@ namespace ProiectWeb.Pages.Inscrieri
         public async Task OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            var inscriereQuery = _context.Inscriere
+                .Include(i => i.Abonament)
+                .Include(i => i.Membru)
+                .AsQueryable();
+
             if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                Inscriere = await _context.Inscriere
-                    .Include(i => i.Abonament)
-                    .Include(i => i.Membru).ToListAsync();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    inscriereQuery = inscriereQuery.Where(i => i.Membru.Nume.Contains(SearchString)
+                                                             || i.Membru.Prenume.Contains(SearchString));
+                }
             }
             else
             {
-                Inscriere = await _context.Inscriere
-                    .Include(i => i.Abonament)
-                    .Include(i => i.Membru)
-                    .Where(i => i.Membru.Email == user.Email).ToListAsync();
+                inscriereQuery = inscriereQuery.Where(i => i.Membru.Email == user.Email);
             }
+
+            Inscriere = await inscriereQuery.ToListAsync();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity;
+@using ProiectWeb.Areas.Identity.Data;
 @model ProiectWeb.Pages.Inscrieri.IndexModel
 
 @{
@@ -10,6 +12,20 @@
 <p>
     <a asp-page="Create">Gestioneaza Inscrierile!</a>
 </p>
+
+@inject UserManager<GymUser> UserManager
+
+@if (UserManager.GetUserAsync(User).Result != null && UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin").Result)
+{
+    <form method="get">
+        <div class="form-group">
+            <label for="searchString">Caută membru:</label>
+            <input type="text" class="form-control" id="searchString" name="searchString" value="@Model.SearchString" />
+        </div>
+        <button type="submit" class="btn btn-primary">Caută</button>
+    </form>
+}
+
 <table class="table">
     <thead>
         <tr>
